@@ -141,7 +141,7 @@ try:
 except KeyError as e:
     print('')
 EOF`
-    echo `cat|python -c "$statement" "$1"`
+    echo `cat|python3 -c "$statement" "$1"`
 }
 fetch_track_by_id() {
     result=`curl -s "http://mobile.ximalaya.com/v1/track/baseInfo?device=iPhone&trackId=$1"|grep title`
@@ -170,7 +170,7 @@ items = json.loads(sys.argv[1])['data']['list']
 for item in items:
     print(item['trackId'])
 EOF`
-    echo `python -c "$statement" "$content"`
+    echo `python3 -c "$statement" "$content"`
 }
 # parse url to get albumId and trackId
 url=`echo $1|sed -n '/^http/p'`
@@ -212,7 +212,7 @@ statement=`cat << EOF
 import json,sys
 print(json.loads(sys.argv[1])['data']['maxPageId'])
 EOF`
-    page_count=`python -c "$statement" "$content"`
+    page_count=`python3 -c "$statement" "$content"`
     for p in `seq 1 $page_count`
     do
         info "Parse page $p/$page_count ..."
